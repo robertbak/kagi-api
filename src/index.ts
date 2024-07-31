@@ -13,7 +13,7 @@ interface IKagiClient {
     engine?: "cecil" | "agnes" | "daphne" | "muriel",
     summary_type?: "summary" | "takeaway",
     target_language?: string,
-    cache?: boolean,
+    cache?: boolean
   ): Promise<SummarizationResponse>;
   fastgpt(query: string, cache?: boolean): Promise<FastGPTResponse>;
   enrich(query: string): Promise<EnrichResponse>;
@@ -31,7 +31,7 @@ class KagiClient implements IKagiClient {
 
     if (!api_key) {
       throw new Error(
-        "No API key provided. Please provide one or set the KAGI_API_KEY environment variable.",
+        "No API key provided. Please provide one or set the KAGI_API_KEY environment variable."
       );
     }
 
@@ -63,11 +63,11 @@ class KagiClient implements IKagiClient {
     engine: "cecil" | "agnes" | "daphne" | "muriel" = "cecil",
     summary_type: "summary" | "takeaway" = "summary",
     target_language?: string,
-    cache?: boolean,
+    cache?: boolean
   ): Promise<SummarizationResponse> {
     if (url && text) {
       throw new Error(
-        "Parameters url and text are exclusive. You must pass one or the other.",
+        "Parameters url and text are exclusive. You must pass one or the other."
       );
     }
 
@@ -78,7 +78,7 @@ class KagiClient implements IKagiClient {
       params["text"] = text;
     } else {
       throw new Error(
-        "Parameters url and text are exclusive. You must pass one or the other.",
+        "Parameters url and text are exclusive. You must pass one or the other."
       );
     }
 
@@ -102,7 +102,7 @@ class KagiClient implements IKagiClient {
 
   async fastgpt(
     query: string,
-    cache: boolean = true,
+    cache: boolean = true
   ): Promise<FastGPTResponse> {
     const data: Record<string, string | boolean> = {
       query,
@@ -131,4 +131,11 @@ class KagiClient implements IKagiClient {
   }
 }
 
-export { KagiClient };
+export {
+  KagiClient,
+  IKagiClient,
+  SearchResponse,
+  SummarizationResponse,
+  FastGPTResponse,
+  EnrichResponse,
+};
